@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Юлия Синякова](https://up.htmlacademy.ru/javascript/21/user/978587).
-* Наставник: `Неизвестно`.
+* Наставник: [Константин Мамаев](https://htmlacademy.ru/profile/meison).
 
 ---
 
