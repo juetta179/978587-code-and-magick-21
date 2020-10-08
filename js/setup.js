@@ -1,11 +1,7 @@
 'use strict';
 const NUMBER_WIZARDS = 4;
 
-let setup = document.querySelector(`.setup`);
-let setupSimilar = document.querySelector(`.setup-similar`);
-setup.classList.remove(`hidden`);
-setupSimilar.classList.remove(`hidden`);
-const firstNames = [
+const FIRST_NAMES = [
   `Иван`,
   `Хуан Себастьян`,
   `Мария`,
@@ -15,8 +11,7 @@ const firstNames = [
   `Люпита`,
   `Вашингтон`
 ];
-
-const lastNames = [
+const LAST_NAMES = [
   `да Марья`,
   `Верон`,
   `Мирабелла`,
@@ -26,8 +21,7 @@ const lastNames = [
   `Нионго`,
   `Ирвинг`
 ];
-
-const coatColors = [
+const COAT_COLORS = [
   `rgb(101, 137, 164)`,
   `rgb(241, 43, 107)`,
   `rgb(146, 100, 161)`,
@@ -35,27 +29,29 @@ const coatColors = [
   `rgb(215, 210, 55)`,
   `rgb(0, 0, 0)`
 ];
-
-const eyesColors = [
+const EYES_COLORS = [
   `black`,
   `red`,
   `blue`,
   `yellow`,
   `green`
 ];
-
-const getRandomWizard = function (firstNames, lastNames, coatColors, eyesColors) {
+const getRandomWizard = function () {
   return {
-    name: firstNames[getRandomInt(0, firstNames.length)] + ` ` + lastNames[getRandomInt(0, lastNames.length)],
-    coatColor: coatColors[getRandomInt(0, coatColors.length)],
-    eyesColor: eyesColors[getRandomInt(0, eyesColors.length)]
+    name: FIRST_NAMES[getRandomInt(0, FIRST_NAMES.length)] + ` ` + LAST_NAMES[getRandomInt(0, LAST_NAMES.length)],
+    coatColor: COAT_COLORS[getRandomInt(0, COAT_COLORS.length)],
+    eyesColor: EYES_COLORS[getRandomInt(0, EYES_COLORS.length)]
   };
 };
+const getWizards = function () {
+  let wizards = [];
+  for (let i = 0; i < NUMBER_WIZARDS; i++) {
+    wizards.unshift(getRandomWizard());
+  }
+  return wizards;
+};
 
-let wizards = [];
-for (let i = 0; i < NUMBER_WIZARDS; i++) {
-  wizards.unshift(getRandomWizard(firstNames, lastNames, coatColors, eyesColors));
-}
+let wizards = getWizards();
 
 let similarWizardTemplate = document.querySelector(`#similar-wizard-template`).content.querySelector(`.setup-similar-item`);
 const renderWizard = function (wizard) {
@@ -70,6 +66,9 @@ let fragment = document.createDocumentFragment();
 for (let i = 0; i < wizards.length; i++) {
   fragment.appendChild(renderWizard(wizards[i]));
 }
+let setup = document.querySelector(`.setup`);
+let setupSimilar = document.querySelector(`.setup-similar`);
 let similarListElement = setup.querySelector(`.setup-similar-list`);
 similarListElement.appendChild(fragment);
+setup.classList.remove(`hidden`);
 setupSimilar.classList.remove(`hidden`);
